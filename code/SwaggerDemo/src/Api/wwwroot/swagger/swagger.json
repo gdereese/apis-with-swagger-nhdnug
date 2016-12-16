@@ -1,0 +1,230 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Thingy API",
+        "description": "Do stuff with things",
+        "version": "1.0.0"
+    },
+    "host": "localhost:5000",
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/widgets": {
+            "get": {
+                "summary": "Get Widgets",
+                "description": "The Get Widgets endpoint returns all widgets registered in the system.\n",
+                "tags": [
+                    "Widgets"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A widget",
+                        "schema": {
+                            "$ref": "#/definitions/Widget"
+                        }
+                    },
+                    "400": {
+                        "description": "One or more request parameters were invalid."
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Widget",
+                "description": "The Create Widget endpoint creates a new widget.\n",
+                "tags": [
+                    "Widgets"
+                ],
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateWidgetRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "A widget",
+                        "schema": {
+                            "$ref": "#/definitions/Widget"
+                        }
+                    },
+                    "400": {
+                        "description": "One or more request parameters were invalid."
+                    }
+                }
+            }
+        },
+        "/widgets/{id}": {
+            "get": {
+                "summary": "Get Widget",
+                "description": "The Get Widget endpoint return a single widget specified by ID.\n",
+                "tags": [
+                    "Widgets"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of widgets",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Widget"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The widget was not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Widget",
+                "description": "The Update Widget endpoint updates an existing widget.\n",
+                "tags": [
+                    "Widgets"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateWidgetRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The widget was updated successfully."
+                    },
+                    "400": {
+                        "description": "One or more request parameters were invalid."
+                    },
+                    "404": {
+                        "description": "The widget was not found."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "CreateWidgetRequest": {
+            "type": "object",
+            "properties": {
+                "buttonColor": {
+                    "type": "string",
+                    "enum": [
+                        "Black",
+                        "Blue",
+                        "Green",
+                        "Orange",
+                        "Purple",
+                        "Red",
+                        "Yellow"
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                },
+                "gearCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "spinnerCount": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "UpdateWidgetRequest": {
+            "type": "object",
+            "properties": {
+                "buttonColor": {
+                    "type": "string",
+                    "enum": [
+                        "Black",
+                        "Blue",
+                        "Green",
+                        "Orange",
+                        "Purple",
+                        "Red",
+                        "Yellow"
+                    ]
+                },
+                "deactivated": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "gearCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "spinnerCount": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Widget": {
+            "type": "object",
+            "properties": {
+                "buttonColor": {
+                    "type": "string",
+                    "enum": [
+                        "Black",
+                        "Blue",
+                        "Green",
+                        "Orange",
+                        "Purple",
+                        "Red",
+                        "Yellow"
+                    ]
+                },
+                "deactivated": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "gearCount": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "spinnerCount": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        }
+    }
+}
